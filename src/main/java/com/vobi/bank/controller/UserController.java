@@ -1,8 +1,15 @@
 package com.vobi.bank.controller;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +27,29 @@ public class UserController {
 	
 	@Autowired
 	UserMapper userMapper;
+	
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable("id") String id) throws Exception{		
+		userService.deleteById(id);
+	}
+	
+	@PutMapping
+	public UserDTO update(@Valid @RequestBody UserDTO userDTO)throws Exception{
+		Users user=userMapper.userDTOtoUser(userDTO);
+		user=userService.update(user);
+		userDTO=userMapper.userToUserDTO(user);
+		
+		return userDTO;
+	}
+	
+	@PostMapping
+	public UserDTO save(@Valid @RequestBody UserDTO userDTO)throws Exception{
+		Users user=userMapper.userDTOtoUser(userDTO);
+		user=userService.save(user);
+		userDTO=userMapper.userToUserDTO(user);
+		
+		return userDTO;
+	}
 	
 	@GetMapping("/{userEmail}")
 	public UserDTO findByName(@PathVariable("userEmail") String name) throws Exception {

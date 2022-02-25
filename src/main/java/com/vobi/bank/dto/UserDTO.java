@@ -3,7 +3,7 @@ package com.vobi.bank.dto;
 
 import javax.validation.constraints.NotNull;
 
-import com.vobi.bank.domain.UserType;
+//import com.vobi.bank.domain.UserType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +19,8 @@ public class UserDTO {
 	@Email(message = "El correo electronico no esta bien escrito")
 	private String userEmail;
 
-	@NotNull
-	private UserType userType;
+	//@NotNull
+	//private UserType userType;
 
 	@NotNull
 	private Integer ustyId;
@@ -31,7 +31,6 @@ public class UserDTO {
 	@NotNull
 	private String name;
 	
-	@NotNull
 	private String token;
 
 }
